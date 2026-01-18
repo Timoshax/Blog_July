@@ -1,0 +1,15 @@
+{% extends "base.html." %}
+{% load i18n %}
+{% block content %}
+<div class = 'images'>
+    {% for image in images %}
+    <img src ="{{image.file.url}}" width = "300px">
+    {% endfor %}
+    
+</div>
+<div class = 'main-info'>
+    <h2>{{post.title}}</h2>
+    <p>{% trans 'Опубликован' %}:{{post.author.username}} ({{post.time_stamp}})</p>
+    <p>{{post.Content}}</p>
+</div> 
+{% endblock  %}

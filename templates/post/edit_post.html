@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static i18n %}
+{% block content %}
+<div>
+    <h1>{% trans 'изменение поста' %}</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="title">{% trans 'Заголовок' %} (ru) </label>
+        {{form.title_ru}}
+        <label for="Content">{% trans 'Контент' %} (ru) </label>
+        {{form.Content_ru}}
+        <label for="title">{% trans 'Заголовок' %} (en) </label>
+        {{form.title_en}}
+        <label for="Content">{% trans 'Контент' %} (en) </label>
+        {{form.Content_en}}
+        <label for="file-upload-input">{% trans 'Выбрать файл' %}</label>
+        <div style = "display: none;">
+        {{form.images}}
+        </div>
+        <p id = "selected-files"> </p>
+
+        {% for img in post_att %}
+        <div>
+            <input type = "checkbox" value = "{{img.pk}}" name = "attachments">
+            <img src ="{{img.file.url}}" width = "300px">
+        </div>
+        {% endfor %}
+
+        <button type="submit">{% trans 'Сохранить' %}</button>
+    </form>
+</div>
+<script src = "{% static 'script.js'%}" > </script>
+{% endblock content %}
